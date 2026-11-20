@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Laporan Imam Desa Candi Badut</title>
+  <meta name="description" content="Dasbor laporan Imam Desa Candi Badut: keuangan, kegiatan, musyawarah, kepengurusan">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Laporan Imam Desa Candi Badut">
+  <meta property="og:title" content="Laporan Imam Desa Candi Badut">
+  <meta property="og:description" content="Keuangan, kegiatan, musyawarah & kepengurusan dalam satu dasbor">
+  <meta property="og:url" content="https://agungswn-cloud.github.io/imam-desa/">
+  <meta property="og:image" content="https://agungswn-cloud.github.io/imam-desa/og-image.png">
+  <meta property="og:image:secure_url" content="https://agungswn-cloud.github.io/imam-desa/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://agungswn-cloud.github.io/imam-desa/og-image.png">
+  <meta name="theme-color" content="#1f2937">
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Imam Desa">
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #1f2937; overscroll-behavior: none; overflow-x: hidden; }
+    #app { display: block; width: 100%; height: 100vh; height: 100dvh; border: 0; margin: 0; background: #f3f4f6; }
+    #muat {
+      position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; color: #fff; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #111827, #374151); transition: opacity .3s; z-index: 2;
+    }
+    #muat.selesai { opacity: 0; pointer-events: none; }
+    #muat.hilang { display: none; }
+    .putar { width: 42px; height: 42px; border: 4px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: putar 1s linear infinite; }
+    @keyframes putar { to { transform: rotate(360deg); } }
+    #muat a { color: #fbbf24; font-size: 13px; }
+    #cadangan { display: none; }
+  </style>
+</head>
+<body>
+  <div id="muat">
+    <div class="putar"></div>
+    <div><b>Laporan Imam Desa Candi Badut</b></div>
+    <div style="font-size:13px;opacity:.85">Memuat aplikasi…</div>
+    <a id="cadangan" target="_blank" rel="noopener">Tidak muncul? Buka aplikasi di tab baru</a>
+  </div>
+
+  <iframe id="app" title="Laporan Imam Desa Candi Badut" allow="clipboard-write"></iframe>
+
+  <script>
+    // ==== GANTI URL INI jika deployment Apps Script berubah ====
+    var URL_APP = 'https://script.google.com/macros/s/AKfycby9HALYULlJ2CVpVH70ywDphBia3zd2utWsRkMU_FVWM9I1Qh3bDVtVpYD9Gqt5hzlruA/exec';
+
+    var frame = document.getElementById('app');
+    var muat = document.getElementById('muat');
+    var cadangan = document.getElementById('cadangan');
+    cadangan.href = URL_APP;
+    frame.src = URL_APP;
+    frame.addEventListener('load', function () { muat.classList.add('selesai'); setTimeout(function () { muat.classList.add('hilang'); }, 400); });
+    // Jika lambat (mis. browser memblokir cookie pihak ketiga), tampilkan tautan cadangan
+    setTimeout(function () { cadangan.style.display = 'inline'; }, 8000);
+
+    // Service worker: supaya bisa dipasang di layar utama HP
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+    }
+  </script>
+</body>
+</html>
